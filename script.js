@@ -13,9 +13,11 @@ class Cube {
   }
 
   rotateX(dir) {
-    const posi = Rematrix.rotateX(dir * 90);
-    const nega = Rematrix.rotateX(-dir * 90);
-    this.matrix = Rematrix.multiply(this.matrix, positive);
+    this.matrix = Rematrix.multiply(this.matrix, Rematrix.rotateX(dir * 90));
+  }
+
+  rotateY(dir) {
+    this.matrix = Rematrix.multiply(this.matrix, Rematrix.rotateY(dir * 90));
   }
 }
 
@@ -55,18 +57,16 @@ new Vue({
         return;
       }
       this.selected.rotateX(dir);
+      this.selected.top && this.selected.top.rotateX(-dir);
+      this.selected.bottom && this.selected.bottom.rotateX(-dir);
     },
     rotateY(dir) {
       if (!this.selected) {
         return;
       }
-      this.selected.rotateY += dir;
-      if (this.selected.left) {
-        this.selected.left.rotateY -= dir;
-      }
-      if (this.selected.right) {
-        this.selected.right.rotateY -= dir;
-      }
+      this.selected.rotateY(dir);
+      this.selected.left && this.selected.left.rotateY(-dir);
+      this.selected.right && this.selected.right.rotateY(-dir);
     },
   },
 });
