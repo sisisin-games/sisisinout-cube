@@ -16,11 +16,11 @@ Vue.component('v-cube', {
   },
   computed: {
     style() {
+      const a = [];
+      this.cube.transforms.forEach(t => a.unshift(`rotate${t}(90deg)`));
+      a.unshift('translateZ(-40px)');
       return {
-        transform: `
-          translateZ(-40px)
-          matrix3d(${this.cube.matrix})
-        `,
+        transform: a.join(' '),
       };
     },
   },

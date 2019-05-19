@@ -9,10 +9,12 @@ class Cube {
     this.x = x;
     this.y = y;
     this.i = i;
+    this.transforms = [];
     this.matrix = Rematrix.identity();
   }
 
   rotateX(dir) {
+    this.transforms.push();
     this.matrix = Rematrix.multiply(Rematrix.rotateX(dir * 90), this.matrix);
   }
 
