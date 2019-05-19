@@ -4,9 +4,22 @@ const width = 5;
 const height = 5;
 const cubes = [];
 
+class Cube {
+  constructor(x, y, i) {
+    this.x = x;
+    this.y = y;
+    this.i = i;
+    this.rotateX = 0;
+    this.rotateY = 0;
+    this.rotateZ = 0;
+  }
+
+  rotateX(dir) {}
+}
+
 for (let x = 0, i = 0; x < height; x++) {
   for (let y = 0; y < width; y++, i++) {
-    cubes.push({ x, y, i, rotateX: 0, rotateY: 0, rotateZ: 0 });
+    cubes.push(new Cube(x, y, i));
   }
 }
 
@@ -61,4 +74,3 @@ new Vue({
     },
   },
 });
-w
