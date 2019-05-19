@@ -12,24 +12,20 @@ Vue.component('v-cube', {
     </div>
   `,
   props: {
-    x: Number,
-    y: Number,
-    z: Number,
+    cube: Object,
   },
   computed: {
     style() {
       return {
         transform: `
-          rotateX(${this.x * 90}deg)
-          rotateY(${this.y * 90}deg)
-          rotateZ(${this.z * 90}deg)
+          translateZ(-40px)
+          rotateX(${this.cube.rotateX * 90}deg)
+          rotateY(${this.cube.rotateY * 90}deg)
+          rotateZ(${this.cube.rotateZ * 90}deg)
         `,
       };
     },
   },
   methods: {
-    click() {
-      this.y++;
-    },
   },
 });

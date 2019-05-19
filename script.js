@@ -4,17 +4,17 @@ const width = 5;
 const height = 5;
 const cubes = [];
 
-for (let x = 0; x < height; x++) {
-  for (let y = 0; y < width; y++) {
-    cubes.push({ x, y, rotateX: 0, rotateY: 0, rotateZ: 0 });
+for (let x = 0, i = 0; x < height; x++) {
+  for (let y = 0; y < width; y++, i++) {
+    cubes.push({ x, y, i, rotateX: 0, rotateY: 0, rotateZ: 0 });
   }
 }
 
 cubes.forEach(c => {
-  c.top = cubes[(c.y - 1) * width + c.x];
-  c.bottom = cubes[(c.y + 1) * width + c.x];
-  c.left = cubes[c.y * width + c.x];
-  c.top = cubes[(c.y - 1) * width + c.x];
+  c.top = c.y ? cubes[c.i - width] : null;
+  c.bottom = c.y < height - 1 ? cubes[c.i + width] : null;
+  c.left = c.x ? cubes[c.i - 1] : null;
+  c.right = c.x < width - 1 ? cubes[c.i + 1] : null;
 });
 
 new Vue({
