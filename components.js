@@ -2,7 +2,7 @@
 
 Vue.component('v-cube', {
   template: `
-    <div class="cube">
+    <div class="cube" :style="style">
       <div class="dice dice-1"/>
       <div class="dice dice-2"/>
       <div class="dice dice-3"/>
@@ -12,8 +12,11 @@ Vue.component('v-cube', {
     </div>
   `,
   props: {
+    x: Number,
+    y: Number,
+    z: Number,
   },
-  data() {
+  get style() {
     return {};
   },
 });
