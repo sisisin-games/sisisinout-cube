@@ -31,8 +31,8 @@ new Vue({
       switch (key) {
         case 'w': return this.rotateX(1);
         case 's': return this.rotateX(-1);
-        case 'a': return this.rotateY(1);
-        case 'd': return this.rotateY(-1);
+        case 'a': return this.rotateY(-1);
+        case 'd': return this.rotateY(1);
       }
     },
     rotateX(dir) {
@@ -40,16 +40,25 @@ new Vue({
         return;
       }
       this.selected.rotateX += dir;
-      (this.selected.top && this.selected.top).rotateX -= dir;
-      (this.selected.bottom && this.selected.bottom).rotateX -= dir;
+      if (this.selected.top) {
+        this.selected.top.rotateX -= dir;
+      }
+      if (this.selected.bottom) {
+        this.selected.bottom.rotateX -= dir;
+      }
     },
     rotateY(dir) {
       if (!this.selected) {
         return;
       }
       this.selected.rotateY += dir;
-      (this.selected.left && this.selected.left).rotateY -= dir;
-      (this.selected.right && this.selected.right).rotateY -= dir;
+      if (this.selected.left) {
+        this.selected.left.rotateY -= dir;
+      }
+      if (this.selected.right) {
+        this.selected.right.rotateY -= dir;
+      }
     },
   },
 });
+w
