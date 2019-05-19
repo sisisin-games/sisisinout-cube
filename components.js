@@ -16,11 +16,8 @@ Vue.component('v-cube', {
   },
   computed: {
     style() {
-      const a = [];
-      this.cube.transforms.forEach(t => a.unshift(`rotate${t}(90deg)`));
-      a.unshift('translateZ(-40px)');
       return {
-        transform: a.join(' '),
+        transform: `translateZ(-40px) ${this.cube.transforms.join(' ')}`,
       };
     },
   },

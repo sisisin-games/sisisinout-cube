@@ -1,7 +1,7 @@
 /* global Vue:false Rematrix:false */
 
-const width = 5;
-const height = 5;
+const width = 3;
+const height = 3;
 const cubes = [];
 
 class Cube {
@@ -10,16 +10,14 @@ class Cube {
     this.y = y;
     this.i = i;
     this.transforms = [];
-    this.matrix = Rematrix.identity();
   }
 
-  rotateX(dir) {
-    this.transforms.push();
-    this.matrix = Rematrix.multiply(Rematrix.rotateX(dir * 90), this.matrix);
+  rotateX(deg) {
+    this.transforms.unshift(`rotateX(${deg}deg)`);
   }
 
-  rotateY(dir) {
-    this.matrix = Rematrix.multiply(Rematrix.rotateY(dir * 90), this.matrix);
+  rotateY(deg) {
+    this.transforms.unshift(`rotateY(${deg}deg)`);
   }
 }
 
@@ -48,27 +46,27 @@ new Vue({
   methods: {
     keydown({key}) {
       switch (key) {
-        case 'w': return this.rotateX(1);
-        case 's': return this.rotateX(-1);
-        case 'a': return this.rotateY(-1);
-        case 'd': return this.rotateY(1);
+        case 'w': return this.rotateX(90);
+        case 's': return this.rotateX(-90);
+        case 'a': return this.rotateY(-90);
+        case 'd': return this.rotateY(90);
       }
     },
-    rotateX(dir) {
+    rotateX(deg) {
       if (!this.selected) {
         return;
       }
-      this.selected.rotateX(dir);
-      this.selected.top && this.selected.top.rotateX(-dir);
-      this.selected.bottom && this.selected.bottom.rotateX(-dir);
+      this.selected.rotateX(deg);
+      this.selected.top && this.selected.top.rotateX(-deg);
+      this.selected.bottom && this.selected.bottom.rotateX(-deg);
     },
-    rotateY(dir) {
+    rotateY(deg) {
       if (!this.selected) {
         return;
       }
-      this.selected.rotateY(dir);
-      this.selected.left && this.selected.left.rotateY(-dir);
-      this.selected.right && this.selected.right.rotateY(-dir);
+      this.selected.rotateY(deg);
+      this.selected.left && this.selected.left.rotateY(-deg);
+      this.selected.right && this.selected.right.rotateY(-deg);
     },
   },
 });

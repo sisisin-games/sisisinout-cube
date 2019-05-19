@@ -12,7 +12,7 @@
   <script src="/script.js" defer></script>
 </head>  
 <body>
-  <div id="app" @keydown="keydown($event)">
+  <div id="app">
     <v-cube v-for="cube in cubes" :cube="cube" @mouseenter="selected = cube"></v-cube>
   </div>
 </body>
