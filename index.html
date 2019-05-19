@@ -1,22 +1,18 @@
 <!doctype html>
 <html>
 <head>
-  <title></title>
+  <title>Vue</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://diafygi.github.io/dice-css/dice-1.0.min.css">
   <link rel="stylesheet" href="/style.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-  <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
   <script src="/components.js"></script>
   <script src="/script.js" defer></script>
 </head>  
 <body>
-  <a-scene>
-    <a-box position="0 0 -10" rotation="0 0 0" color="#4CC3D9">
-      <a-animation attribute="rotation" to="90 0 0" dur="500"></a-animation>
-    </a-box>
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-    <a-sky color="#ECECEC"></a-sky>
-  </a-scene>
+  <div id="app">
+    <v-cube></v-cube>
+  </div>
 </body>
 </html>

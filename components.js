@@ -1,7 +1,12 @@
 /* global Vue:false */
 
 Vue.component('v-cube', {
-  props: {},
+  template: `
+    <div class="dice dice-1"/>
+  `,
+  props: {
+  },
   data() {
-  }.
+    return {};
+  },
 });
