@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Vue</title>
+  <title>Diceout</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="https://diafygi.github.io/dice-css/dice-1.0.min.css">
@@ -13,7 +13,7 @@
 </head>  
 <body>
   <div id="app">
-    <v-cube v-for="cube in cubes" :cube="cube" @mouseenter="selected = cube"></v-cube>
+    <v-cube v-for="cube in cubes" :cube="cube" @mouseenter="selected = cube" @mouseleave="selected = null"></v-cube>
   </div>
 </body>
 </html>
