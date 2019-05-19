@@ -10,9 +10,9 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-gap: 20px;
-  width: 480px;
-  height: 480px;
+  grid-gap: 30px;
+  width: 520px;
+  height: 520px;
   perspective: 1000px;
 }
 

@@ -20,7 +20,10 @@ cubes.forEach(c => {
 new Vue({
   data: {
     cubes,
+    selected: null,
   },
   methods: {
+    mouseenter() {
+    },
   },
 }).$mount('#app');

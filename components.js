@@ -2,7 +2,7 @@
 
 Vue.component('v-cube', {
   template: `
-    <div class="cube" :style="style" @click="$emit('click')">
+    <div class="cube" :style="style" v-on="$listeners">
       <div class="dice dice-1"/>
       <div class="dice dice-2"/>
       <div class="dice dice-3"/>
