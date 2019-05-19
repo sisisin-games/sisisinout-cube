@@ -13,11 +13,11 @@ class Cube {
   }
 
   rotateX(dir) {
-    this.matrix = Rematrix.multiply(this.matrix, Rematrix.rotateX(dir * 90));
+    this.matrix = Rematrix.multiply(Rematrix.rotateX(dir * 90), this.matrix);
   }
 
   rotateY(dir) {
-    this.matrix = Rematrix.multiply(this.matrix, Rematrix.rotateY(dir * 90));
+    this.matrix = Rematrix.multiply(Rematrix.rotateY(dir * 90), this.matrix);
   }
 }
 
