@@ -21,6 +21,7 @@ body {
   font-size: 80px;
   transform-style: preserve-3d;
   transform: translateZ(-40px);
+  transition: .5s;
 }
 
 .dice {
