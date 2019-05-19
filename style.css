@@ -10,10 +10,9 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-gap: 10px;
-  width: 460px;
-  height: 460px;
-  border: 10px solid #ccc;
+  grid-gap: 20px;
+  width: 480px;
+  height: 480px;
   perspective: 1000px;
 }
 
@@ -21,10 +20,12 @@ body {
   position: relative;
   font-size: 80px;
   transform-style: preserve-3d;
+  transform: translateZ(-40px);
 }
 
 .dice {
   position: absolute;
+  backface-visibility: hidden;
 }
 
 .dice-1 { transform: rotateX(     0) translateZ(40px); }
