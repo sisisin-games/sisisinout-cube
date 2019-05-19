@@ -19,9 +19,7 @@ Vue.component('v-cube', {
       return {
         transform: `
           translateZ(-40px)
-          rotateX(${this.cube.rotateX * 90}deg)
-          rotateY(${this.cube.rotateY * 90}deg)
-          rotateZ(${this.cube.rotateZ * 90}deg)
+          matrix3d(${this.cube.matrix})
         `,
       };
     },

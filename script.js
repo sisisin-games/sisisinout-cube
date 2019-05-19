@@ -1,4 +1,4 @@
-/* global Vue:false */
+/* global Vue:false Rematrix:false */
 
 const width = 5;
 const height = 5;
@@ -9,12 +9,14 @@ class Cube {
     this.x = x;
     this.y = y;
     this.i = i;
-    this.rotateX = 0;
-    this.rotateY = 0;
-    this.rotateZ = 0;
+    this.matrix = Rematrix.identity();
   }
 
-  rotateX(dir) {}
+  rotateX(dir) {
+    const posi = Rematrix.rotateX(dir * 90);
+    const nega = Rematrix.rotateX(-dir * 90);
+    this.matrix = Rematrix.multiply(this.matrix, positive);
+  }
 }
 
 for (let x = 0, i = 0; x < height; x++) {
@@ -52,13 +54,7 @@ new Vue({
       if (!this.selected) {
         return;
       }
-      this.selected.rotateX += dir;
-      if (this.selected.top) {
-        this.selected.top.rotateX -= dir;
-      }
-      if (this.selected.bottom) {
-        this.selected.bottom.rotateX -= dir;
-      }
+      this.selected.rotateX(dir);
     },
     rotateY(dir) {
       if (!this.selected) {
