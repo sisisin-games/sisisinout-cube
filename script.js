@@ -21,8 +21,8 @@ class Cube {
   }
 }
 
-for (let x = 0, i = 0; x < height; x++) {
-  for (let y = 0; y < width; y++, i++) {
+for (let y = 0, i = 0; y < height; y++) {
+  for (let x = 0; x < width; x++, i++) {
     cubes.push(new Cube(x, y, i));
   }
 }
