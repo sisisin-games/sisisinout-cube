@@ -1,11 +1,11 @@
 /* global Vue:false */
 
-const cells = Array(25).fill(0).map(() => ({
+const cubes = Array(25).fill(0).map(() => ({
   x: 0, y: 0, z: 0,
 }));
 
 new Vue({
   data: {
-    cells,
+    cubes,
   },
 }).$mount('#app');
