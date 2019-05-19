@@ -17,7 +17,7 @@ Vue.component('v-cube', {
   computed: {
     style() {
       return {
-        transform: `translateZ(-40px) ${this.cube.transforms.join(' ')}`,
+        transform: `translateZ(-40px) matrix3d(${this.cube.currentMatrix}) matrix3d(${this.cube.matrix})`,
       };
     },
   },
