@@ -9,20 +9,22 @@ class Cube {
     this.x = x;
     this.y = y;
     this.i = i;
-    this.transforms = [];
-    this.matrixes = [Rematrix.identity(), Rematrix.identity(), Rematrix.identity(), Rematrix.identity()];
+    this.lastRotation = [];
+    this.matrix = Rematrix.identity();
+  }
+
+  pushMatrix(m) {
+    const [dir, deg] = this.lastRotation;
+    const last = dir === 'x' ? Rematrix.rotateX(deg) : Rematrix.rotateY(deg);
+    this.matrix = Rematrix.multiply(last, this.matrix);
   }
 
   rotateX(deg) {
-    this.transforms.unshift(`rotateX(${deg}deg)`);
-    const [m1, m2, m3, m4] = this.matrixes;
-    this.matrixes = [Rematrix.rotateX(deg), m1, m2, Rematrix.multiply(m3, m4)];
+    this.matrixes.unshift(Rematrix.rotateX(deg));
   }
 
   rotateY(deg) {
-    this.transforms.unshift(`rotateY(${deg}deg)`);
-    const [m1, m2, m3] = this.matrixes;
-    this.matrixes = [Rematrix.rotateY(deg), m1, Rematrix.multiply(m2, m3)];
+    this.matrixes.unshift(Rematrix.rotateY(deg));
   }
 }
 
