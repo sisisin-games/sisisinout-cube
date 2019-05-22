@@ -7,12 +7,13 @@
   <link rel="stylesheet" href="https://diafygi.github.io/dice-css/dice-1.0.min.css">
   <link rel="stylesheet" href="/style.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/rematrix@0.2.3/dist/rematrix.min.js"></script>
   <script src="/components.js"></script>
   <script src="/script.js" defer></script>
 </head>  
 <body>
   <div id="app">
-    <v-cube v-for="cube in cubes" :cube="cube" @mouseenter="selected = cube" @mouseleave="selected = null"></v-cube>
+    <v-cube v-for="cube in cubes" :cube="cube" @mouseenter="activeCube = cube" @mouseleave="activeCube = null"></v-cube>
   </div>
   <div>Hover and WASD</div>
 </body>

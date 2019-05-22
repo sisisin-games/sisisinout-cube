@@ -1,14 +1,16 @@
 /* global Vue:false */
 
-Vue.component('v-cube', {
+const VCube = Vue.component('v-cube', {
   template: `
-    <div class="cube" :style="style" v-on="$listeners">
-      <div class="dice dice-1"/>
-      <div class="dice dice-2"/>
-      <div class="dice dice-3"/>
-      <div class="dice dice-4"/>
-      <div class="dice dice-5"/>
-      <div class="dice dice-6"/>
+    <div class="cube" :class="{'no-anim': cube.noAnim}" :style="style" v-on="$listeners" @transitionend="cube.idle()">
+      <div class="cube-inner" :style="innerStyle">
+        <div class="dice dice-1"/>
+        <div class="dice dice-2"/>
+        <div class="dice dice-3"/>
+        <div class="dice dice-4"/>
+        <div class="dice dice-5"/>
+        <div class="dice dice-6"/>
+      </div>
     </div>
   `,
   props: {
@@ -16,11 +18,15 @@ Vue.component('v-cube', {
   },
   computed: {
     style() {
+      const rotate = this.cube.rotateDeg ? `rotate${this.cube.rotateAxis}(${this.cube.rotateDeg}deg)` : '';
       return {
-        transform: `translateZ(-40px) ${this.cube.transforms.join(' ')}`,
+        transform: `translateZ(-40px) ${rotate}`,
       };
     },
-  },
-  methods: {
+    innerStyle() {
+      return {
+        transform: `matrix3d(${this.cube.matrix})`,
+      };
+    },
   },
 });
