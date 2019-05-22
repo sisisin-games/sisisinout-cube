@@ -4,12 +4,12 @@ const VCube = Vue.component('v-cube', {
   template: `
     <div class="cube" :class="{'no-anim': cube.noAnim}" :style="style" v-on="$listeners" @transitionend="cube.idle()">
       <div class="cube-inner" :style="innerStyle">
-        <div class="dice dice-1"/>
-        <div class="dice dice-2"/>
-        <div class="dice dice-3"/>
-        <div class="dice dice-4"/>
-        <div class="dice dice-5"/>
-        <div class="dice dice-6"/>
+        <div class="nyan nyan-1"/>
+        <div class="nyan nyan-2"/>
+        <div class="nyan nyan-3"/>
+        <div class="nyan nyan-4"/>
+        <div class="nyan nyan-5"/>
+        <div class="nyan nyan-6"/>
       </div>
     </div>
   `,
