@@ -26,7 +26,7 @@ body {
 
 .dice {
   position: absolute;
-  backface-visibility: hidden;
+/*   backface-visibility: hidden; */
 }
 
 .dice-1 { transform: rotateX(0) translateZ(50px); }
