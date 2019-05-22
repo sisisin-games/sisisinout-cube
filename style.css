@@ -10,6 +10,7 @@ body {
   height: 100vh;
   margin: 0;
   background-color: #333;
+  perspective: 500px;
 }
 
 #app {
@@ -17,7 +18,9 @@ body {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 40px;
+  background-color: #999;
   perspective: 500px;
+  transform: translateZ(-100px);
 }
 
 .cube {
@@ -75,6 +78,6 @@ body {
   background-color: #ff0;
 }
 
-.cube:hover .nyan {
+.cube:not(:hover) .nyan {
   filter: brightness(90%);
 }

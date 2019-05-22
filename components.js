@@ -20,7 +20,7 @@ const VCube = Vue.component('v-cube', {
     style() {
       const rotate = this.cube.rotateDeg ? `rotate${this.cube.rotateAxis}(${this.cube.rotateDeg}deg)` : '';
       return {
-        transform: `translateZ(-40px) ${rotate}`,
+        transform: `translateZ(50px) ${rotate}`,
       };
     },
     innerStyle() {
