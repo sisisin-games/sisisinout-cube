@@ -37,5 +37,5 @@ body {
 .dice-6 { transform: rotateX(180deg) translateZ(50px); }
 
 .cube:hover > .dice {
-  box-shadow: 0 0 0 1px #f00;
+  background-color: #0cc6;
 }
