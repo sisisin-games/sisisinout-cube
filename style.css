@@ -24,6 +24,7 @@ body {
   background-blend-mode: darken;
   perspective: 500px;
   transform: translateZ(-100px);
+  animation: scroll-bg 1s linear infinite;
 }
 
 .cube {
@@ -83,4 +84,9 @@ body {
 
 .cube:hover .nyan {
   filter: brightness(150%);
+}
+
+@keyframes scroll-bg {
+  from { background-position: 0 0; }
+  to { background-position: 100% 100%; }
 }
