@@ -20,11 +20,11 @@ body {
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 50px;
   margin: 20px 0;
-  background: url("https://emoji.slack-edge.com/T04Q5G460/sisisin/dca153ae0c46d1c3.jpg") #999 center/cover no-repeat;
+  background: url("https://emoji.slack-edge.com/T04Q5G460/sisisin/dca153ae0c46d1c3.jpg") #999 0 0/50%;
   background-blend-mode: darken;
   perspective: 500px;
   transform: translateZ(-100px);
-  animation: scroll-bg 1s linear infinite;
+  animation: scroll-bg 30s linear infinite;
 }
 
 .cube {
@@ -87,6 +87,5 @@ body {
 }
 
 @keyframes scroll-bg {
-  from { background-position: 0 0; }
   to { background-position: 100% 100%; }
 }
