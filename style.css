@@ -9,6 +9,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  color: #fff;
   background-color: #333;
   perspective: 500px;
 }
@@ -17,8 +18,10 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  grid-gap: 40px;
-  background-color: #999;
+  grid-gap: 50px;
+  margin: 20px 0;
+  background: url("https://emoji.slack-edge.com/T04Q5G460/sisisin/dca153ae0c46d1c3.jpg") #999 center/cover no-repeat;
+  background-blend-mode: darken;
   perspective: 500px;
   transform: translateZ(-100px);
 }
@@ -78,6 +81,6 @@ body {
   background-color: #ff0;
 }
 
-.cube:not(:hover) .nyan {
-  filter: brightness(90%);
+.cube:hover .nyan {
+  filter: brightness(150%);
 }
