@@ -39,6 +39,7 @@
       this.rotateDeg = deg;
       if (immediate) {
         this.transform();
+        this.busy = false;
       }
     }
 
@@ -83,11 +84,13 @@
     },
 
     created() {
-      for (let i = 0; i < 4; i++) {
-        for (const cube of cubes) {
-          switch (Math.random() * 4 | 0) {
-            case 0: this.rotateUp();
-          }
+      for (let i = 0; i < 100; i++) {
+        const cube = cubes[Math.random() * cubes.length | 0];
+        switch (Math.random() * 4 | 0) {
+          case 0: this.rotateUp(cube, true); break;
+          case 1: this.rotateDown(cube, true); break;
+          case 2: this.rotateLeft(cube, true); break;
+          case 3: this.rotateRight(cube, true); break;
         }
       }
     },
@@ -102,42 +105,42 @@
           return;
         }
         switch (key) {
-          case 'w': return this.rotateUp();
-          case 's': return this.rotateDown();
-          case 'a': return this.rotateLeft();
-          case 'd': return this.rotateRight();
+          case 'w': return this.rotateUp(this.activeCube);
+          case 's': return this.rotateDown(this.activeCube);
+          case 'a': return this.rotateLeft(this.activeCube);
+          case 'd': return this.rotateRight(this.activeCube);
         }
       },
 
-      rotateUp() {
-        this.rotateX(90)
+      rotateUp(cube, immediate) {
+        this.rotateX(cube, 90, immediate);
       },
 
-      rotateDown() {
-        this.rotateX(-90)
+      rotateDown(cube, immediate) {
+        this.rotateX(cube, -90, immediate);
       },
 
-      rotateLeft() {
-        this.rotateY(-90)
+      rotateLeft(cube, immediate) {
+        this.rotateY(cube, -90, immediate);
       },
 
-      rotateRight() {
-        this.rotateY(90)
+      rotateRight(cube, immediate) {
+        this.rotateY(cube, 90, immediate);
       },
 
-      rotateX(deg, immediate) {
-        if (this.activeCube.canRotate('X')) {
-          this.activeCube.rotate('X', deg, immediate);
-          this.activeCube.top && this.activeCube.top.rotate('X', -deg, immediate);
-          this.activeCube.bottom && this.activeCube.bottom.rotate('X', -deg, immediate);
+      rotateX(cube, deg, immediate) {
+        if (cube.canRotate('X')) {
+          cube.rotate('X', deg, immediate);
+          cube.top && cube.top.rotate('X', -deg, immediate);
+          cube.bottom && cube.bottom.rotate('X', -deg, immediate);
         }
       },
 
-      rotateY(deg, immediate) {
-        if (this.activeCube.canRotate('Y')) {
-          this.activeCube.rotate('Y', deg, immediate);
-          this.activeCube.left && this.activeCube.left.rotate('Y', -deg);
-          this.activeCube.right && this.activeCube.right.rotate('Y', -deg);
+      rotateY(cube, deg, immediate) {
+        if (cube.canRotate('Y')) {
+          cube.rotate('Y', deg, immediate);
+          cube.left && cube.left.rotate('Y', -deg, immediate);
+          cube.right && cube.right.rotate('Y', -deg, immediate);
         }
       },
     },
