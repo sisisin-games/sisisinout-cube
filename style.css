@@ -29,6 +29,7 @@ body {
 
 #app.completed {
   grid-gap: 0;
+  transform: none;
   transition: 2s;
 }
 
