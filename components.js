@@ -2,7 +2,7 @@
 
 const VCube = Vue.component('v-cube', {
   template: `
-    <div class="cube" :class="{'no-anim': cube.noAnim}" :style="style" v-on="$listeners" @transitionend="cube.idle()">
+    <div class="cube" :class="{'no-anim': cube.noAnim}" :style="style" v-on="$listeners" @transitionend="idle">
       <div class="cube-inner" :style="innerStyle">
         <div class="nyan nyan-1"/>
         <div class="nyan nyan-2"/>
@@ -28,5 +28,11 @@ const VCube = Vue.component('v-cube', {
         transform: `matrix3d(${this.cube.matrix})`,
       };
     },
+  },
+  methods: {
+    async idle() {
+      await this.cube.idle();
+      this.$emit('idle');
+    }
   },
 });
