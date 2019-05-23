@@ -33,8 +33,16 @@ body {
   transition: 2s;
 }
 
+#app.completed .cube {
+  transform: none !important;
+  transition: 2s;
+}
+
 #app.completed .nyan {
   border-width: 0;
+  background-color: #fff;
+  background-blend-mode: normal;
+  filter: sepia(100%) saturate(364%) contrast(92%);
   transform: rotateZ(360deg);
   transition: 2s;
 }
