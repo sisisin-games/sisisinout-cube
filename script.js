@@ -1,6 +1,6 @@
 /* global Vue:false Rematrix:false */
 
-{
+// {
   const width = 3;
   const height = 3;
   const cubes = [];
@@ -36,17 +36,6 @@
     rotate(axis, deg) {
       this.busy = true;
       this.rotateAxis = axis;
-      this.rotateDeg = deg;
-    }
-
-    rotateX(deg) {
-      this.rotate('X';
-      this.rotateDeg = deg;
-    }
-
-    rotateY(deg) {
-      this.busy = true;
-      this.rotateAxis = 'Y';
       this.rotateDeg = deg;
     }
 
@@ -88,39 +77,60 @@
 
   new Vue({
     el: '#app',
+
     data: {
       cubes,
       activeCube: null,
     },
+
     mounted() {
       document.addEventListener('keydown', event => this.keydown(event));
     },
+
     methods: {
       keydown({key}) {
         if (!this.activeCube || this.activeCube.busy) {
           return;
         }
         switch (key) {
-          case 'w': return this.rotateX(90);
-          case 's': return this.rotateX(-90);
-          case 'a': return this.rotateY(-90);
-          case 'd': return this.rotateY(90);
+          case 'w': return this.rotateUp();
+          case 's': return this.rotateDown();
+          case 'a': return this.rotateLeft();
+          case 'd': return this.rotateRight();
         }
       },
+
+      rotateUp() {
+        this.rotateX(90)
+      },
+
+      rotateDown() {
+        this.rotateX(-90)
+      },
+
+      rotateLeft() {
+        this.rotateY(-90)
+      },
+
+      rotateRight() {
+        this.rotateY(90)
+      },
+
       rotateX(deg) {
         if (this.activeCube.canRotate('X')) {
-          this.activeCube.rotateX(deg);
-          this.activeCube.top && this.activeCube.top.rotateX(-deg);
-          this.activeCube.bottom && this.activeCube.bottom.rotateX(-deg);
+          this.activeCube.rotate('X', deg);
+          this.activeCube.top && this.activeCube.top.rotate('X', -deg);
+          this.activeCube.bottom && this.activeCube.bottom.rotate('X', -deg);
         }
       },
+
       rotateY(deg) {
         if (this.activeCube.canRotate('Y')) {
-          this.activeCube.rotateY(deg);
-          this.activeCube.left && this.activeCube.left.rotateY(-deg);
-          this.activeCube.right && this.activeCube.right.rotateY(-deg);
+          this.activeCube.rotate('Y', deg);
+          this.activeCube.left && this.activeCube.left.rotate('Y', -deg);
+          this.activeCube.right && this.activeCube.right.rotate('Y', -deg);
         }
       },
     },
   });
-}
+// }
