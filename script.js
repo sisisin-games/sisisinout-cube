@@ -84,7 +84,7 @@
         c.right = c.x < width - 1 ? cubes[c.i + 1] : null;
       });
 
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 1; i++) {
         const cube = cubes[Math.random() * cubes.length | 0];
         this.rotate(Math.random() * 4 | 0, cube, true);
       }
@@ -96,13 +96,16 @@
     
     computed: {
       completed() {
-        return cubes.every(cube => cube.matrix);
+        const identity = Rematrix.identity();
+        return cubes.every(
+          cube => cube.matrix.every(
+            (v, i) => Math.abs(v - identity[i]) < 10e-8));
       },
     },
 
     methods: {
       keydown({key}) {
-        if (!this.activeCube || this.activeCube.busy) {
+        if (this.completed || !this.activeCube) {
           return;
         }
         switch (key) {

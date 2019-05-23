@@ -12,7 +12,7 @@
   <script src="/script.js" defer></script>
 </head>  
 <body>
-  <div id="app">
+  <div id="app" :class="{completed}">
     <v-cube v-for="cube in cubes" :cube="cube" @mouseenter="activeCube = cube" @mouseleave="activeCube = null"></v-cube>
   </div>
   <div>Mouse hover: select cube</div>

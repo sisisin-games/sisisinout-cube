@@ -27,6 +27,21 @@ body {
   animation: scroll-bg 30s linear infinite;
 }
 
+#app.completed {
+  grid-gap: 0;
+  transition: 2s;
+}
+
+#app.completed .nyan {
+  border-width: 0;
+  transform: rotateZ(360deg);
+  transition: 2s;
+}
+
+#app.completed .nyan:not(.nyan-1) {
+  opacity: 0;
+}
+
 .cube {
   width: 100px;
   height: 100px;
