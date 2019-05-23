@@ -93,6 +93,12 @@
     mounted() {
       document.addEventListener('keydown', event => this.keydown(event));
     },
+    
+    computed: {
+      completed() {
+        return cubes.every(cube => cube.matrix);
+      },
+    },
 
     methods: {
       keydown({key}) {
