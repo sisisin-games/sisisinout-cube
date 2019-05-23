@@ -1,6 +1,6 @@
 /* global Vue:false Rematrix:false */
 
-// {
+{
   const width = 3;
   const height = 3;
   const cubes = [];
@@ -60,19 +60,6 @@
     }
   }
 
-  for (let y = 0, i = 0; y < height; y++) {
-    for (let x = 0; x < width; x++, i++) {
-      cubes.push(new Cube(x, y, i));
-    }
-  }
-
-  cubes.forEach(c => {
-    c.top = c.y ? cubes[c.i - width] : null;
-    c.bottom = c.y < height - 1 ? cubes[c.i + width] : null;
-    c.left = c.x ? cubes[c.i - 1] : null;
-    c.right = c.x < width - 1 ? cubes[c.i + 1] : null;
-  });
-  
   new Vue({
     el: '#app',
 
@@ -84,14 +71,22 @@
     },
 
     created() {
+      for (let y = 0, i = 0; y < height; y++) {
+        for (let x = 0; x < width; x++, i++) {
+          cubes.push(new Cube(x, y, i));
+        }
+      }
+
+      cubes.forEach(c => {
+        c.top = c.y ? cubes[c.i - width] : null;
+        c.bottom = c.y < height - 1 ? cubes[c.i + width] : null;
+        c.left = c.x ? cubes[c.i - 1] : null;
+        c.right = c.x < width - 1 ? cubes[c.i + 1] : null;
+      });
+
       for (let i = 0; i < 100; i++) {
         const cube = cubes[Math.random() * cubes.length | 0];
-        switch (Math.random() * 4 | 0) {
-          case 0: this.rotateUp(cube, true); break;
-          case 1: this.rotateDown(cube, true); break;
-          case 2: this.rotateLeft(cube, true); break;
-          case 3: this.rotateRight(cube, true); break;
-        }
+        this.rotate(Math.random() * 4 | 0, cube, true);
       }
     },
 
@@ -105,27 +100,15 @@
           return;
         }
         switch (key) {
-          case 'w': return this.rotateUp(this.activeCube);
-          case 's': return this.rotateDown(this.activeCube);
-          case 'a': return this.rotateLeft(this.activeCube);
-          case 'd': return this.rotateRight(this.activeCube);
+          case 'w': return this.rotate(0, this.activeCube);
+          case 'd': return this.rotate(1, this.activeCube);
+          case 's': return this.rotate(2, this.activeCube);
+          case 'a': return this.rotate(3, this.activeCube);
         }
       },
 
-      rotateUp(cube, immediate) {
-        this.rotateX(cube, 90, immediate);
-      },
-
-      rotateDown(cube, immediate) {
-        this.rotateX(cube, -90, immediate);
-      },
-
-      rotateLeft(cube, immediate) {
-        this.rotateY(cube, -90, immediate);
-      },
-
-      rotateRight(cube, immediate) {
-        this.rotateY(cube, 90, immediate);
+      rotate(dir, cube, immediate) {
+        this[dir % 2 ? 'rotateY' : 'rotateX'](cube, (1 - (dir & 2)) * 90, immediate)
       },
 
       rotateX(cube, deg, immediate) {
@@ -145,4 +128,4 @@
       },
     },
   });
-// }
+}
