@@ -33,10 +33,13 @@
       return !this.busy && rel.every(c => !c || !c.busy);
     }
 
-    rotate(axis, deg) {
+    rotate(axis, deg, immediate) {
       this.busy = true;
       this.rotateAxis = axis;
       this.rotateDeg = deg;
+      if (immediate) {
+        this.transform();
+      }
     }
 
     transform() {
@@ -69,18 +72,24 @@
     c.right = c.x < width - 1 ? cubes[c.i + 1] : null;
   });
   
-  for (let i = 0; i < 4; i++) {
-    for (const cube of cubes) {
-      
-    }
-  }
-
   new Vue({
     el: '#app',
 
-    data: {
-      cubes,
-      activeCube: null,
+    data() {
+      return {
+        cubes,
+        activeCube: null,
+      }
+    },
+
+    created() {
+      for (let i = 0; i < 4; i++) {
+        for (const cube of cubes) {
+          switch (Math.random() * 4 | 0) {
+            case 0: this.rotateUp();
+          }
+        }
+      }
     },
 
     mounted() {
@@ -116,17 +125,17 @@
         this.rotateY(90)
       },
 
-      rotateX(deg) {
+      rotateX(deg, immediate) {
         if (this.activeCube.canRotate('X')) {
-          this.activeCube.rotate('X', deg);
-          this.activeCube.top && this.activeCube.top.rotate('X', -deg);
-          this.activeCube.bottom && this.activeCube.bottom.rotate('X', -deg);
+          this.activeCube.rotate('X', deg, immediate);
+          this.activeCube.top && this.activeCube.top.rotate('X', -deg, immediate);
+          this.activeCube.bottom && this.activeCube.bottom.rotate('X', -deg, immediate);
         }
       },
 
-      rotateY(deg) {
+      rotateY(deg, immediate) {
         if (this.activeCube.canRotate('Y')) {
-          this.activeCube.rotate('Y', deg);
+          this.activeCube.rotate('Y', deg, immediate);
           this.activeCube.left && this.activeCube.left.rotate('Y', -deg);
           this.activeCube.right && this.activeCube.right.rotate('Y', -deg);
         }
