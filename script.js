@@ -67,6 +67,7 @@
       return {
         cubes,
         activeCube: null,
+        startedAt: 0,
       }
     },
 
@@ -92,6 +93,7 @@
 
     mounted() {
       document.addEventListener('keydown', event => this.keydown(event));
+      this.startedAt = Date.now();
     },
     
     computed: {
