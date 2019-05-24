@@ -84,7 +84,7 @@
         c.right = c.x < width - 1 ? cubes[c.i + 1] : null;
       });
 
-      for (let i = 0; i < 1; i++) {
+      for (let i = 0; i < 100; i++) {
         const cube = cubes[Math.random() * cubes.length | 0];
         this.rotate(Math.random() * 4 | 0, cube, true);
       }
