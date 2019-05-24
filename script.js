@@ -68,6 +68,7 @@
         cubes,
         activeCube: null,
         startedAt: 0,
+        finishedAt: 0,
       }
     },
 
@@ -89,6 +90,11 @@
         const cube = cubes[Math.random() * cubes.length | 0];
         this.rotate(Math.random() * 4 | 0, cube, true);
       }
+
+      this.$watch('completed', () => {
+        this.finishedAt = Date.now();
+        this.finish();
+      });
     },
 
     mounted() {
@@ -96,12 +102,6 @@
       this.startedAt = Date.now();
     },
 
-    watch: {
-      completed() {
-        
-      },
-    },
-    
     computed: {
       completed() {
         const identity = Rematrix.identity();
@@ -109,6 +109,10 @@
           cube => cube.matrix.every(
             (v, i) => Math.abs(v - identity[i]) < 10e-8));
       },
+
+      elapsed() {
+        return this.finishedAt - this.startedAt;
+      }
     },
 
     methods: {
@@ -142,6 +146,10 @@
           cube.left && cube.left.rotate('Y', -deg, immediate);
           cube.right && cube.right.rotate('Y', -deg, immediate);
         }
+      },
+
+      finish() {
+        alert(`クリア！！\nタイムは ${this.elapsed / 1000 | 0} 秒でした`);
       },
     },
   });
