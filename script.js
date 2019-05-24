@@ -95,6 +95,12 @@
       document.addEventListener('keydown', event => this.keydown(event));
       this.startedAt = Date.now();
     },
+
+    watch: {
+      completed() {
+        
+      },
+    },
     
     computed: {
       completed() {
