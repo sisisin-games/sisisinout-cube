@@ -3,6 +3,7 @@
 }
 
 body {
+  --sisisin: url("https://emoji.slack-edge.com/T04Q5G460/sisisin/dca153ae0c46d1c3.jpg");
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +21,7 @@ body {
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 50px;
   margin: 20px 0;
-  background: url("https://emoji.slack-edge.com/T04Q5G460/sisisin/dca153ae0c46d1c3.jpg") #999 0 0/50%;
+  background: var(--sisisin) #999 0 0/50%;
   background-blend-mode: darken;
   perspective: 500px;
   transform: translateZ(-100px);
@@ -59,7 +60,7 @@ body {
   height: 100%;
   border: 5px solid #0000;
   box-sizing: border-box;
-  background: url("https://emoji.slack-edge.com/T04Q5G460/sisisin/dca153ae0c46d1c3.jpg") center/cover no-repeat;
+  background: var(--sisisin) center/cover no-repeat;
   background-blend-mode: luminosity;
   backface-visibility: hidden;
 }

@@ -5,8 +5,12 @@
   const height = 3;
   const cubes = [];
 
-  async function wait() {
-    return Promise.all([new Promise(Vue.nextTick), new Promise(requestAnimationFrame)]);
+  async function wait(ms) {
+    await Promise.all([
+      new Promise(Vue.nextTick),
+      new Promise(requestAnimationFrame),
+      ms && new Promise(r => setTimeout(r, ms))
+    ]);
   }
 
   class Cube {
@@ -91,7 +95,8 @@
         this.rotate(Math.random() * 4 | 0, cube, true);
       }
 
-      this.$watch('completed', () => {
+      this.$watch('completed', async () => {
+        await wait(3000);
         this.finishedAt = Date.now();
         this.finish();
       });
