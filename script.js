@@ -154,7 +154,7 @@
       async finish() {
         this.finishedAt = Date.now();
         await wait(3000);
-        alert(`クリア！！\nタイムは ${this.elapsed / 1000 | 0} 秒でした`);
+        alert(`クリア！！\nタイムは ${(this.elapsed / 1000).toFixed(2)} 秒でした`);
       },
     },
   });
