@@ -96,6 +96,9 @@
       }
 
       this.$watch('completed', async () => {
+        if (this.busy) {
+          return;
+        }
         await wait(3000);
         this.finishedAt = Date.now();
         this.finish();
@@ -108,6 +111,10 @@
     },
 
     computed: {
+      busy() {
+        return cubes.some(cube => cube.busy);
+      },
+
       completed() {
         const identity = Rematrix.identity();
         return cubes.every(
