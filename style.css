@@ -31,10 +31,11 @@ body {
   grid-gap: 0;
   transform: none;
   transition: 2s;
+  animation: none;
 }
 
-#app.completed * {
-  transform: none;
+#app.completed .cube {
+  transform: none !important;
   transition: 2s;
 }
 
@@ -44,7 +45,7 @@ body {
   background-blend-mode: normal;
   filter: sepia(100%) saturate(364%) contrast(92%);
   transform: rotateZ(360deg);
-  transition: 2s;
+  transition: 3s;
 }
 
 #app.completed .nyan:not(.nyan-1) {
@@ -106,7 +107,7 @@ body {
   background-color: #ff0;
 }
 
-.cube:hover .nyan {
+#app:not(.completed) .cube:hover .nyan {
   filter: brightness(150%);
 }
 
