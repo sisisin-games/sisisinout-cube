@@ -95,12 +95,7 @@
         this.rotate(Math.random() * 4 | 0, cube, true);
       }
 
-      this.$watch('completed', async () => {
-        if (this.busy) {
-          return;
-        }
-        await wait(3000);
-        this.finishedAt = Date.now();
+      this.$watch('completed', () => {
         this.finish();
       });
     },
@@ -111,20 +106,16 @@
     },
 
     computed: {
-      busy() {
-        return cubes.some(cube => cube.busy);
-      },
-
       completed() {
         const identity = Rematrix.identity();
         return cubes.every(
-          cube => cube.matrix.every(
+          cube => !cube.busy && cube.matrix.every(
             (v, i) => Math.abs(v - identity[i]) < 10e-8));
       },
 
       elapsed() {
         return this.finishedAt - this.startedAt;
-      }
+      },
     },
 
     methods: {
@@ -160,7 +151,9 @@
         }
       },
 
-      finish() {
+      async finish() {
+        this.finishedAt = Date.now();
+        await wait(3000);
         alert(`クリア！！\nタイムは ${this.elapsed / 1000 | 0} 秒でした`);
       },
     },
