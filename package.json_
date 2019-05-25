@@ -1,9 +1,0 @@
-{
-  "main": "lib",
-  "scripts": {
-    "start": "node .",
-  },
-  "engines": {
-    "node": "12.*"
-  }
-}

@@ -1,0 +1,14 @@
+{
+  "main": "lib",
+  "scripts": {
+    "start": "node ."
+  },
+  "engines": {
+    "node": "12.*"
+  },
+  "dependencies": {
+    "koa": "2.7.0",
+    "koa-router": "7.4.0",
+    "koa-static": "5.0.0"
+  }
+}
