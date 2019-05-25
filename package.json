@@ -1,8 +1,0 @@
-{
-  "engines": {
-    "node": "12.*"
-  },
-  "dependencies": {
-    "koa": "^2.7.0"
-  }
-}
