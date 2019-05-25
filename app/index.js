@@ -1,8 +1,9 @@
 const Koa = require('koa');
 const serve = require('koa-static');
-const socket = require('socket.io');
+const createIo = require('socket.io');
 
 const app = new Koa();
+const io = createIo(app);
 
 app.use(serve('public'));
 
