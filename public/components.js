@@ -1,4 +1,4 @@
-/* global Vue:false */
+/* global Vue:false dayjs:false */
 
 Vue.filter('relativeTime', value => {
   if (!value) {
@@ -66,7 +66,8 @@ Vue.component('v-cube', {
 Vue.component('v-leaderboard', {
   template: `
     <div class="leaderboard">
-      <table>
+      <h2>Ranking</h2>
+      <table v-if="list.length">
         <thead>
           <tr><th>Rank</th><th>Name</th><th>Time</th><th>Submitted</th></tr>
         </thead>
@@ -74,6 +75,7 @@ Vue.component('v-leaderboard', {
           <v-leaderboard-item v-for="(item, index) in list" :key="item.name" :rank="index + 1" :item="item"/>
         </tbody>
       </table>
+      <div v-else>no data</div>
     </div>
   `,
   props: {

@@ -1,10 +1,10 @@
 const Koa = require('koa');
 const serve = require('koa-static');
-const { createConnection } = require('typeorm');
+const { getConnectionOptions, createConnection } = require('typeorm');
 const io = require('./io');
 
 async function main() {
-  await createConnection();
+  await createConnection(require('../ormconfig'));
 
   const app = new Koa();
 
