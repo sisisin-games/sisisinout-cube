@@ -1,4 +1,5 @@
 {
+  "name": "sisisinout-cube",
   "dependencies": {
     "koa": "2.7.0",
     "koa-router": "7.4.0",
