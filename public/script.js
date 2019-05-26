@@ -1,4 +1,12 @@
-/* global Vue:false Rematrix:false */
+/*
+  global
+  Vue:false
+  Rematrix:false
+  io:false
+  dayjs:false
+  dayjs_plugin_relativeTime:false
+  dayjs_plugin_localizedFormat:false
+*/
 
 dayjs.locale('ja');
 dayjs.extend(dayjs_plugin_relativeTime);
@@ -6,7 +14,6 @@ dayjs.extend(dayjs_plugin_localizedFormat);
 
 {
   const socket = io();
-  window.socket = socket;
 
   async function wait(ms) {
     await Promise.all([
@@ -98,8 +105,7 @@ dayjs.extend(dayjs_plugin_localizedFormat);
       });
 
       do {
-        // for (let i = 0; i < width * height * 10; i++) {
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < width * height * 10; i++) {
           const cube = this.cubes[(Math.random() * this.cubes.length) | 0];
           this.rotate((Math.random() * 4) | 0, cube, true);
         }

@@ -140,6 +140,10 @@ body {
   overflow-y: auto;
 }
 
+.leaderboard h2 {
+  text-align: center;
+}
+
 .leaderboard th,
 .leaderboard td {
   padding: 0.3em 1rem;

@@ -8,10 +8,10 @@ module.exports = server => {
     async 'score:list'(next) {
       next(await getScoreList());
     },
-    async 'score:put'(data) {
+    async 'score:put'(data, next) {
       const score = new Score(data.name, data.time);
       await score.save();
-      await score.reload();
+      next();
       io.emit('score:list', await getScoreList());
     },
   };
