@@ -1,12 +1,20 @@
 const Koa = require('koa');
 const serve = require('koa-static');
-const createIo = require('socket.io');
+const { createConnection } = require('typeorm');
+const io = require('./io');
 
-const app = new Koa();
-const io = createIo(app);
+async function main() {
+  await createConnection();
 
-app.use(serve('public'));
+  const app = new Koa();
 
-app.listen(process.env.PORT, () => {
-  console.log(`listening on port ${process.env.PORT}`);
-});
+  app.use(serve('public'));
+
+  const server = app.listen(process.env.PORT, () => {
+    console.log(`listening on port ${process.env.PORT}`);
+  });
+
+  io(server);
+}
+
+main();

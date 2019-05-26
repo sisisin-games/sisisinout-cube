@@ -12,37 +12,59 @@ body {
   margin: 0;
   color: #fff;
   background-color: #333;
-  perspective: 500px;
 }
 
 #app {
+  --bg-size: 30px;
+  display: flex;
+  align-items: center;
+  background: var(--sisisin) #666 0 0/var(--bg-size);
+  background-blend-mode: darken;
+  /* animation: scroll-bg 5s linear infinite; */
+}
+
+@keyframes scroll-bg {
+  100% {
+    background-position: var(--bg-size) var(--bg-size);
+  }
+}
+
+.game {
+  --size: 100px;
+  --half-size: calc(var(--size) * 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: var(--half-size);
+  width: calc(var(--size) * 4);
+  height: calc(var(--size) * 4);
+  perspective: 500px;
+}
+
+.cube-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  grid-gap: 50px;
-  margin: 20px 0;
-  background: var(--sisisin) #999 0 0/50%;
-  background-blend-mode: darken;
-  perspective: 500px;
-  transform: translateZ(-100px);
-  animation: scroll-bg 30s linear infinite;
+  grid-gap: var(--half-size);
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--size) * -1));
 }
 
-#app.completed {
+.game.completed .cube-container {
   grid-gap: 0;
   transform: none;
   transition: 2s;
-  animation: none;
 }
 
 .cube {
-  width: 100px;
-  height: 100px;
+  width: var(--size);
+  height: var(--size);
   transform-style: preserve-3d;
   transition: 200ms;
 }
 
-#app.completed .cube {
+.game.completed .cube {
   transform: translateZ(0) !important;
   transition: 2s;
 }
@@ -58,7 +80,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 5px solid #0000;
+  border: calc(var(--size) * 0.05) solid #0000;
   box-sizing: border-box;
   background: var(--sisisin) center/cover no-repeat;
   background-blend-mode: luminosity;
@@ -66,40 +88,40 @@ body {
 }
 
 .nyan-1 {
-  transform: rotateX(0) translateZ(50px);
+  transform: rotateX(0) translateZ(var(--half-size));
   background-color: #000;
 }
 
 .nyan-2 {
-  transform: rotateX(90deg) translateZ(50px);
+  transform: rotateX(90deg) translateZ(var(--half-size));
   background-color: #00f;
 }
 
 .nyan-3 {
-  transform: rotateY(90deg) translateZ(50px);
+  transform: rotateY(90deg) translateZ(var(--half-size));
   background-color: #f00;
 }
 
 .nyan-4 {
-  transform: rotateY(-90deg) translateZ(50px);
+  transform: rotateY(-90deg) translateZ(var(--half-size));
   background-color: #f90;
 }
 
 .nyan-5 {
-  transform: rotateX(-90deg) translateZ(50px);
+  transform: rotateX(-90deg) translateZ(var(--half-size));
   background-color: #0f0;
 }
 
 .nyan-6 {
-  transform: rotateX(180deg) translateZ(50px);
+  transform: rotateX(180deg) translateZ(var(--half-size));
   background-color: #ff0;
 }
 
-#app:not(.completed) .cube:hover .nyan {
+.game:not(.completed) .cube:hover .nyan {
   filter: brightness(150%);
 }
 
-#app.completed .nyan {
+.game.completed .nyan {
   border-width: 0;
   background-color: #fff;
   background-blend-mode: normal;
@@ -108,10 +130,33 @@ body {
   transition: 3s;
 }
 
-#app.completed .nyan:not(.nyan-1) {
+.game.completed .nyan:not(.nyan-1) {
   opacity: 0;
 }
 
-@keyframes scroll-bg {
-  to { background-position: 100% 100%; }
+.leaderboard th,
+.leaderboard td {
+  padding: 0.3em 1rem;
+  white-space: nowrap;
+}
+
+.leaderboard {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.leaderboard th {
+  font-weight: normal;
+}
+
+.score {
+  font-size: calc(-10% * var(--rank) + 160%);
+  text-align: right;
+}
+
+.score-name {
+  max-width: 10em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
 }

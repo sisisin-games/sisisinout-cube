@@ -1,15 +1,18 @@
 /* global Vue:false Rematrix:false */
 
+dayjs.locale('ja');
+dayjs.extend(dayjs_plugin_relativeTime);
+dayjs.extend(dayjs_plugin_localizedFormat);
+
 {
-  const width = 3;
-  const height = 3;
-  const cubes = [];
+  const socket = io();
+  window.socket = socket;
 
   async function wait(ms) {
     await Promise.all([
       new Promise(Vue.nextTick),
       new Promise(requestAnimationFrame),
-      ms && new Promise(r => setTimeout(r, ms))
+      ms && new Promise(r => setTimeout(r, ms)),
     ]);
   }
 
@@ -30,9 +33,7 @@
     }
 
     canRotate(axis) {
-      const rel = axis === 'X'
-        ? [this.top, this.bottom]
-        : [this.left, this.right];
+      const rel = axis === 'X' ? [this.top, this.bottom] : [this.left, this.right];
 
       return !this.busy && rel.every(c => !c || !c.busy);
     }
@@ -69,31 +70,40 @@
 
     data() {
       return {
-        cubes,
+        cubes: [],
+        scores: [],
         activeCube: null,
         startedAt: 0,
         finishedAt: 0,
-      }
+        formShown: false,
+        scoreSubmitted: false,
+      };
     },
 
     created() {
+      const width = 3;
+      const height = 3;
+
       for (let y = 0, i = 0; y < height; y++) {
         for (let x = 0; x < width; x++, i++) {
-          cubes.push(new Cube(x, y, i));
+          this.cubes.push(new Cube(x, y, i));
         }
       }
 
-      cubes.forEach(c => {
-        c.top = c.y ? cubes[c.i - width] : null;
-        c.bottom = c.y < height - 1 ? cubes[c.i + width] : null;
-        c.left = c.x ? cubes[c.i - 1] : null;
-        c.right = c.x < width - 1 ? cubes[c.i + 1] : null;
+      this.cubes.forEach(c => {
+        c.top = c.y ? this.cubes[c.i - width] : null;
+        c.bottom = c.y < height - 1 ? this.cubes[c.i + width] : null;
+        c.left = c.x ? this.cubes[c.i - 1] : null;
+        c.right = c.x < width - 1 ? this.cubes[c.i + 1] : null;
       });
 
-      for (let i = 0; i < 100; i++) {
-        const cube = cubes[Math.random() * cubes.length | 0];
-        this.rotate(Math.random() * 4 | 0, cube, true);
-      }
+      do {
+        // for (let i = 0; i < width * height * 10; i++) {
+        for (let i = 0; i < 1; i++) {
+          const cube = this.cubes[(Math.random() * this.cubes.length) | 0];
+          this.rotate((Math.random() * 4) | 0, cube, true);
+        }
+      } while (this.completed);
 
       this.$watch('completed', () => {
         this.finish();
@@ -103,14 +113,19 @@
     mounted() {
       document.addEventListener('keydown', event => this.keydown(event));
       this.startedAt = Date.now();
+
+      socket.on('score:list', scores => {
+        this.scores = scores;
+      });
+      socket.emit('score:list', scores => {
+        this.scores = scores;
+      });
     },
 
     computed: {
       completed() {
         const identity = Rematrix.identity();
-        return cubes.every(
-          cube => !cube.busy && cube.matrix.every(
-            (v, i) => Math.abs(v - identity[i]) < 10e-8));
+        return this.cubes.every(cube => !cube.busy && cube.matrix.every((v, i) => Math.abs(v - identity[i]) < 10e-8));
       },
 
       elapsed() {
@@ -119,20 +134,24 @@
     },
 
     methods: {
-      keydown({key}) {
+      keydown({ key }) {
         if (this.completed || !this.activeCube) {
           return;
         }
         switch (key) {
-          case 'w': return this.rotate(0, this.activeCube);
-          case 'd': return this.rotate(1, this.activeCube);
-          case 's': return this.rotate(2, this.activeCube);
-          case 'a': return this.rotate(3, this.activeCube);
+          case 'w':
+            return this.rotate(0, this.activeCube);
+          case 'd':
+            return this.rotate(1, this.activeCube);
+          case 's':
+            return this.rotate(2, this.activeCube);
+          case 'a':
+            return this.rotate(3, this.activeCube);
         }
       },
 
       rotate(dir, cube, immediate) {
-        this[dir % 2 ? 'rotateY' : 'rotateX'](cube, (1 - (dir & 2)) * 90, immediate)
+        this[dir % 2 ? 'rotateY' : 'rotateX'](cube, (1 - (dir & 2)) * 90, immediate);
       },
 
       rotateX(cube, deg, immediate) {
@@ -154,7 +173,13 @@
       async finish() {
         this.finishedAt = Date.now();
         await wait(3000);
-        alert(`クリア！！\nタイムは ${(this.elapsed / 1000).toFixed(2)} 秒でした`);
+        this.formShown = true;
+      },
+
+      async submit(name) {
+        socket.emit('score:put', { name, time: this.elapsed }, () => {
+          this.formShown = false;
+        });
       },
     },
   });
