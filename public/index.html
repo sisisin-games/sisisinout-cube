@@ -15,20 +15,25 @@
     <script src="/components.js" defer></script>
     <script src="/script.js" defer></script>
   </head>
-  <body>
-    <div id="app">
-      <div class="game" :class="{ completed }">
-        <div class="cube-container">
-          <v-cube
-            v-for="cube in cubes"
-            :cube="cube"
-            @mouseenter="activeCube = cube"
-            @mouseleave="activeCube = null"
-          ></v-cube>
+  <body class="column">
+    <div id="app" class="column">
+      <div class="row bg">
+        <div class="column game" :class="{ completed }">
+          <div class="cube-container">
+            <v-cube
+              v-for="cube in cubes"
+              :cube="cube"
+              @mouseenter="activeCube = cube"
+              @mouseleave="activeCube = null"
+            ></v-cube>
+          </div>
+          <v-score-form :value="formShown" :time="elapsed" @submit="submit"></v-score-form>
         </div>
-        <v-score-form :value="formShown" :time="elapsed" @submit="submit"></v-score-form>
+        <v-leaderboard :list="scores"></v-leaderboard>
       </div>
-      <v-leaderboard :list="scores"></v-leaderboard>
+      <div class="row">
+        <button class="btn-link" @click="showHelp">Help</button>
+      </div>
     </div>
     <div class="glitchButton" style="position:fixed;top:20px;right:20px;">
       <script src="https://button.glitch.me/button.js" async defer></script>
