@@ -17,6 +17,7 @@
   </head>
   <body class="column">
     <div id="app" class="column">
+      <h1>sisisinout cube ❒</h1>
       <div class="row bg">
         <div class="column game" :class="{ completed }">
           <div class="cube-container">
@@ -32,9 +33,9 @@
         <v-leaderboard :list="scores"></v-leaderboard>
       </div>
       <div class="row">
-        <div>{{ elapsed | scoreTime }}</div>
+        <div class="current-time">{{ elapsed | scoreTime }}</div>
         <div class="spacer"></div>
-        <button class="btn-link" @click="showHelp">How to play</button>
+        <button class="help btn-link" @click="showHelp">How to play</button>
       </div>
     </div>
     <div class="glitchButton" style="position:fixed;top:20px;right:20px;">

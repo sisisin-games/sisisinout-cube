@@ -195,7 +195,7 @@ dayjs.extend(dayjs_plugin_localizedFormat);
       },
 
       showHelp() {
-        alert(`マウス移動でキューブを選択\n選んだキューブを W, A, S, D キーで回転\n黒い sisisin をまっすぐに 9 個そろえればクリアです`);
+        alert('マウス移動でキューブを選択\n選んだキューブを W, A, S, D キーで回転\n黒い sisisin をまっすぐに 9 個そろえればクリアです\nやり直しはリロードで');
       },
     },
   });
