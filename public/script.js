@@ -81,6 +81,7 @@ dayjs.extend(dayjs_plugin_localizedFormat);
         scores: [],
         activeCube: null,
         startedAt: 0,
+        currentTime: 0,
         finishedAt: 0,
         formShown: false,
         scoreSubmitted: false,
@@ -116,7 +117,7 @@ dayjs.extend(dayjs_plugin_localizedFormat);
       });
     },
 
-    mounted() {
+    async mounted() {
       document.addEventListener('keydown', event => this.keydown(event));
       this.startedAt = Date.now();
 
@@ -126,6 +127,11 @@ dayjs.extend(dayjs_plugin_localizedFormat);
       socket.emit('score:list', scores => {
         this.scores = scores;
       });
+
+      while (true) {
+        await wait();
+        this.currentTime = Date.now();
+      }
     },
 
     computed: {
@@ -135,7 +141,7 @@ dayjs.extend(dayjs_plugin_localizedFormat);
       },
 
       elapsed() {
-        return this.finishedAt - this.startedAt;
+        return (this.completed ? this.finishedAt : this.currentTime) - this.startedAt;
       },
     },
 
@@ -189,7 +195,7 @@ dayjs.extend(dayjs_plugin_localizedFormat);
       },
 
       showHelp() {
-        alert(`マウス移動でキューブを選択\nW, A, S, D キーで選択されたキューブを回転`);
+        alert(`マウス移動でキューブを選択\n選んだキューブを W, A, S, D キーで回転\n黒い sisisin を 9 個そろえよう！\n逆さや横向きではだめだ！`);
       },
     },
   });

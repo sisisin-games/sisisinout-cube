@@ -32,7 +32,9 @@
         <v-leaderboard :list="scores"></v-leaderboard>
       </div>
       <div class="row">
-        <button class="btn-link" @click="showHelp">Help</button>
+        <div>{{ elapsed | scoreTime }}</div>
+        <div class="spacer"></div>
+        <button class="btn-link" @click="showHelp">How to play</button>
       </div>
     </div>
     <div class="glitchButton" style="position:fixed;top:20px;right:20px;">

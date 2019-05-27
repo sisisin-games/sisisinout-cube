@@ -11,6 +11,10 @@
   flex-direction: column;
 }
 
+.spacer {
+  flex-grow: 1;
+}
+
 .bg {
   background: var(--sisisin) #666 0 0/var(--bg-size);
   background-blend-mode: darken;
