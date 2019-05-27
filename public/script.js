@@ -17,9 +17,9 @@ dayjs.extend(dayjs_plugin_localizedFormat);
 
   async function wait(ms) {
     await Promise.all([
-      new Promise(Vue.nextTick),
       new Promise(requestAnimationFrame),
       ms && new Promise(r => setTimeout(r, ms)),
+      ms || new Promise(Vue.nextTick),
     ]);
   }
 
@@ -129,7 +129,7 @@ dayjs.extend(dayjs_plugin_localizedFormat);
       });
 
       while (true) {
-        await wait();
+        await wait(16);
         this.currentTime = Date.now();
       }
     },
@@ -195,7 +195,7 @@ dayjs.extend(dayjs_plugin_localizedFormat);
       },
 
       showHelp() {
-        alert(`マウス移動でキューブを選択\n選んだキューブを W, A, S, D キーで回転\n黒い sisisin を 9 個そろえよう！\n逆さや横向きではだめだ！`);
+        alert(`マウス移動でキューブを選択\n選んだキューブを W, A, S, D キーで回転\n黒い sisisin をまっすぐに 9 個そろえればクリアです`);
       },
     },
   });
