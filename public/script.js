@@ -187,6 +187,10 @@ dayjs.extend(dayjs_plugin_localizedFormat);
           this.formShown = false;
         });
       },
+
+      showHelp() {
+        alert(`マウス移動でキューブを選択\nW, A, S, D キーで選択されたキューブを回転`);
+      },
     },
   });
 }
