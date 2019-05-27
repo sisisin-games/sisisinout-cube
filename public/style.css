@@ -178,6 +178,10 @@ body {
   text-align: right;
 }
 
+.score-rank {
+  text-align: center;
+}
+
 .score-name {
   max-width: 10em;
   overflow: hidden;
@@ -187,6 +191,18 @@ body {
 
 .leaderboard h2::before {
   content: "👑 ";
+}
+
+.leaderboard .score:nth-child(1) .score-name::before {
+  content: "🥇";
+}
+
+.leaderboard .score:nth-child(2) .score-name::before {
+  content: "🥈";
+}
+
+.leaderboard .score:nth-child(3) .score-name::before {
+  content: "🥉";
 }
 
 .current-time::before {

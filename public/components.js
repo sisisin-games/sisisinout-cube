@@ -66,10 +66,10 @@ Vue.component('v-cube', {
 Vue.component('v-leaderboard', {
   template: `
     <div class="leaderboard">
-      <h2>Ranking</h2>
+      <h2>Leaderboard</h2>
       <table v-if="list.length">
         <thead>
-          <tr><th>Rank</th><th>Name</th><th>Time</th><th>Submitted</th></tr>
+          <tr><th>Rank</th><th>Player</th><th>Time</th><th>Submitted</th></tr>
         </thead>
         <tbody>
           <v-leaderboard-item v-for="(item, index) in list" :key="item.name" :rank="index + 1" :item="item"/>
@@ -90,7 +90,7 @@ Vue.component('v-leaderboard-item', {
   template: `
     <tr class="score" :style="{ '--rank': rank }">
       <td class="score-rank">{{ rank }}</td>
-      <td class="score-name">{{ item.name }}</td>
+      <td class="score-name">{{ item.name }} 🇯🇵</td>
       <td class="score-time">{{ item.time | scoreTime }}</td>
       <td class="score-date" :title="datetime">{{ item.updatedAt | relativeTime }}</td>
     </tr>
