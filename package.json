@@ -1,7 +1,7 @@
 {
   "name": "sisisinout-cube",
   "dependencies": {
-    "axios": "0.18.0",
+    "axios": "0.19.0",
     "dedent": "0.7.0",
     "koa": "2.7.0",
     "koa-router": "7.4.0",
